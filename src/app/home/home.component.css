@@ -1,0 +1,76 @@
+.signIn{
+    background-color: transparent;
+    font-size: 1.2rem;
+    margin-top: -1.0rem;
+    cursor: pointer;
+    align-items: center;
+    border: 2px solid blue;
+}
+
+.signInText{
+    margin-left: 10px;
+    white-space: nowrap;
+}
+.signInInput{
+    padding: .5rem;
+    width: 30rem;
+    max-width: 60rem;
+    box-sizing: border-box;
+    display: block; 
+}
+
+.input-wrapper {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .input-wrapper input {
+    padding-right: 26px; /* 确保文本不会被按钮遮挡 */
+  }
+  
+
+.home{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 25rem;
+    margin-left: 20rem;
+    width: 40rem;
+}
+
+label {
+    display: block;
+    font-weight: bold;
+    font-size: 1.2rem;
+    margin-top: 1rem;
+    margin-bottom: .5rem;
+}
+
+
+li {
+    list-style-type: none;
+}
+
+.search-result li a {
+    border-bottom: 1px solid gray;
+    border-left: 1px solid gray;
+    border-right: 1px solid gray;
+    display: inline-block;
+    width: 100%;
+    max-width: 600px;
+    padding: .5rem;
+    box-sizing: border-box;
+    text-decoration: none;
+    color: black;
+}
+
+.search-result li a:hover {
+    background-color: #435A60;
+    color: white;
+}
+
+ul.search-result {
+    margin-top: 0;
+    padding-left: 0;
+}

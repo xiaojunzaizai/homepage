@@ -1,9 +1,10 @@
-<a class="button fancy-button">
-    <span class="material-icons" style="color: red;" >home</span>
+<a class="button fancy-button" routerLink="/home">
+    <!-- NgbTooltip提供了多种配置选项，可以通过属性绑定来设置，例如：
+    placement：设置工具提示的位置，如top、bottom、left、right。
+    triggers：定义触发工具提示显示和隐藏的事件，如'click'、'hover'、'focus'。
+    container：指定工具提示应该被添加到哪个DOM元素中。默认情况下，工具提示会被添加到它所附加的元素中，但也可以设置为'body'等。
+    disableTooltip：可以通过绑定一个布尔值来启用或禁用工具提示。 -->
+    <span class="material-icons" style="color: red;" [ngbTooltip]="homeToolTip" placement="bottom" triggers="hover">home</span>
 </a>
-<a>
-    <span class="material-icons" style="color: black;">delete_forever</span>
-</a>
-<a class="button fancy-button">
-    <em class="material-icons">shopping_cart</em>
-Checkout</a>
+<button *ngIf="selectedUser" class="material-icons" style="color: black;" [ngbTooltip]="deleteToolTip" placement="bottom">delete_forever</button>
+

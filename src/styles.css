@@ -60,6 +60,9 @@ input {
   margin-bottom: 16px;
   border: 1px solid #BDBDBD;
 }
+input:focus {
+  outline: #336699 auto 1px;
+}
 
 label {
   font-size: 12px;
@@ -73,22 +76,23 @@ label {
 .button, button {
   display: inline-flex;
   align-items: center;
-  padding: 8px 16px;
+  padding: 4px 8px;
   border-radius: 2px;
   font-size: 14px;
   cursor: pointer;
-  background-color: #1976d2;
+  /* background-color: #1976d2; */
+  background-color: transparent;
   color: white;
   border: none;
 }
 
 .button:hover, button:hover {
-  opacity: 0.8;
+  opacity: 0.5;
   font-weight: normal;
 }
 
 .button:disabled, button:disabled {
-  opacity: 0.5;
+  opacity: 0.2;
   cursor: auto;
 }
 
@@ -123,25 +127,3 @@ app-top-bar h1 {
   color: white;
   margin: 0;
 }
-
-/* Checkout Cart, Shipping Prices */
-
-.cart-item, .shipping-item {
-  width: 100%;
-  min-width: 400px;
-  max-width: 450px;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  padding: 16px 32px;
-  margin-bottom: 8px;
-  border-radius: 2px;
-  background-color: #EEEEEE;
-}
-
-
-/*
-Copyright Google LLC. All Rights Reserved.
-Use of this source code is governed by an MIT-style license that
-can be found in the LICENSE file at https://angular.io/license
-*/

@@ -6,6 +6,8 @@ import { Component } from '@angular/core';
   styleUrls: ['./top-bar.component.css']
 })
 export class TopBarComponent {
-
+homeToolTip = 'home';
+deleteToolTip = 'Clear';
+selectedUser=false;
 
 }
