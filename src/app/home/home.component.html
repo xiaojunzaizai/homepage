@@ -1,13 +1,19 @@
 <div class="home">
-    <div class="input-wrapper">
-        <input class="input signInInput" type="search" placeholder="Please enter a valid name ex. first name + middle name + last name">
-        <!-- <button class="clear-btn" onclick="clearInput()">X</button>     -->
+    <div class="input-and-button-wrapper">
+        <div class="input-wrapper" id="search-component">
+            <input #searchBox id="search-box" class="input signInInput" type="search" 
+            placeholder="Please enter a valid name ex. first name + middle name + last name" (input)="search(searchBox.value)"
+            [(ngModel)]="searchInput">
+        </div>
+        <a class="button fancy-button signIn" [ngbTooltip]="signInToolTip">
+            <span class="material-icons"  >assignment</span>
+            <span class="signInText">Sign In</span>
+        </a>
     </div>
-
-    <!-- routerLink="/signIn"  -->
-    <a class="button fancy-button signIn" [ngbTooltip]="signInToolTip">
-        <span class="material-icons"  >assignment</span>
-        <span class="signInText">Sign In</span>
-    </a>
+    <ul class="search-result">
+        <li *ngFor="let signInUser of signInUsers$ | async" (click)= "selectSignInUser(signInUser)">
+            {{signInUser.firstName + ' ' + signInUser.middleName + ' ' + signInUser.lastName}}
+        </li>
+    </ul>
 
 </div>
