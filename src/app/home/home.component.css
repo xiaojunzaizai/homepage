@@ -85,3 +85,17 @@ ul.search-result {
     margin-top: -1rem;
     list-style-type: none; 
 }
+
+.title{
+    color: #333;
+    line-height: 2;
+}
+.title span {
+    background: linear-gradient(to right, red, black ) no-repeat right bottom;
+    background-size: 0 2px;
+    transition: background-size 1s;
+}
+.title span:hover{
+    background-position: left bottom;
+    background-size: 100% 2px;
+}

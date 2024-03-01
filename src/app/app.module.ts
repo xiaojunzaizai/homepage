@@ -13,6 +13,7 @@ import { TopBarComponent } from './top-bar/top-bar.component';
 import { AppRoutingModule } from './app-routing.module';
 import { BodyComponent } from './body/body.component';
 import { HomeComponent } from './home/home.component';
+import { SignInDetailComponent } from './sign-in-detail/sign-in-detail.component';
 @NgModule({
   imports: [
     BrowserModule,
@@ -33,7 +34,8 @@ import { HomeComponent } from './home/home.component';
     AppComponent,
     TopBarComponent,
     BodyComponent,
-    HomeComponent
+    HomeComponent,
+    SignInDetailComponent
   ],
   bootstrap: [
     AppComponent
