@@ -29,9 +29,17 @@ export class SignInUserService {
         signInUser.lastName.toLowerCase().includes(term.toLowerCase())
       )),
       tap(x => x.length ?
-         this.log(`found heroes matching "${term}"`) :
-         this.log(`no heroes matching "${term}"`)),
+         this.log(`found SignInUsers matching "${term}"`) :
+         this.log(`no SignInUsers matching "${term}"`)),
       catchError(this.handleError<SignInUser[]>('searchSignInUsers', []))
+    );
+  }
+
+  getSignInUser(id: number): Observable<SignInUser> {
+    const url = `${this.signInUsersUrl}/${id}`;
+    return this.http.get<SignInUser>(url).pipe(
+      tap(_ => this.log(`fetched SignInUser id = ${id}`)),
+      catchError(this.handleError<SignInUser>(`getSignInUser id =${id}`))
     );
   }
 
@@ -50,7 +58,7 @@ export class SignInUserService {
   }
 
   private log (message:string ){
-    console.log(`HeroServices: ${message}`);
+    console.log(`SignInUserService: ${message}`);
   }
 
 }

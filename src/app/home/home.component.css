@@ -46,7 +46,7 @@
     flex-direction: column;
     justify-content: center;
     /* align-items: center; */
-    margin-top: 25rem;
+    margin-top: 2.5rem;
     margin-left: 15rem;
     width: 100%;
 }
@@ -89,9 +89,13 @@ ul.search-result {
 .title{
     color: #333;
     line-height: 2;
+    text-align: center;
+    margin-top: 10rem;
+    margin-left: 20rem;
+    font-size: 30px;
 }
 .title span {
-    background: linear-gradient(to right, red, black ) no-repeat right bottom;
+    background: linear-gradient(to right, red, blue ) no-repeat right bottom;
     background-size: 0 2px;
     transition: background-size 1s;
 }
