@@ -8,7 +8,6 @@ import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { InMemoryDataService } from './in-memory-data.service';
 import { FormsModule } from '@angular/forms';
 import { NzButtonModule } from 'ng-zorro-antd/button';
-import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
 import { NzTimePickerModule } from 'ng-zorro-antd/time-picker';
 
@@ -18,6 +17,16 @@ import { AppRoutingModule } from './app-routing.module';
 import { BodyComponent } from './body/body.component';
 import { HomeComponent } from './home/home.component';
 import { SignInDetailComponent } from './sign-in-detail/sign-in-detail.component';
+import { IconsProviderModule } from './icons-provider.module';
+import { NzLayoutModule } from 'ng-zorro-antd/layout';
+import { NzMenuModule } from 'ng-zorro-antd/menu';
+import { NZ_I18N } from 'ng-zorro-antd/i18n';
+import { en_US } from 'ng-zorro-antd/i18n';
+import { registerLocaleData } from '@angular/common';
+import en from '@angular/common/locales/en';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+registerLocaleData(en);
 @NgModule({
   imports: [
     AppRoutingModule,
@@ -33,10 +42,13 @@ import { SignInDetailComponent } from './sign-in-detail/sign-in-detail.component
     NgbModule,
     NzButtonModule,
     NzDatePickerModule,
-    NzIconModule,
     NzTimePickerModule,
     ReactiveFormsModule,
-    RouterModule
+    RouterModule,
+    IconsProviderModule,
+    NzLayoutModule,
+    NzMenuModule,
+    BrowserAnimationsModule
     
   ],
   declarations: [
@@ -48,6 +60,9 @@ import { SignInDetailComponent } from './sign-in-detail/sign-in-detail.component
   ],
   bootstrap: [
     AppComponent
+  ],
+  providers: [
+    { provide: NZ_I18N, useValue: en_US }
   ]
 })
 export class AppModule { }
