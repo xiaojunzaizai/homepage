@@ -3,5 +3,5 @@ export interface SignInUser{
     firstName: string;
     middleName: string;
     lastName: string;
-    signDate: Date[];
+    signDate: string[];
 }

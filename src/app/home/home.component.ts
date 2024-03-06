@@ -1,7 +1,7 @@
 import { Component,OnInit } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged,switchMap } from 'rxjs/operators';
-import { SignInUser } from '../signInuser';
+import { SignInUser } from '../signInUser';
 import { SignInUserService } from '../sign-in-user.service';
 
 @Component({

@@ -6,3 +6,11 @@
         </span>
     </h2>
 </div>
+<div>
+    
+</div>
+<div class='date-time-management'> 
+    <nz-date-picker nzPlaceHolder="Please Select a Date" nzFormat="YYYY/MM/dd" nzInputReadOnly="true" nzShowToday="true" [(ngModel)]="selectedDate" (ngModelChange)="verifyDateAndTime()" ></nz-date-picker>
+    <nz-time-picker nzPlaceHolder="Please Select a Time" nzFormat="HH:mm"  nzInputReadOnly="true" [nzMinuteStep]="15" [(ngModel)]="selectedTime" [nzDefaultOpenValue]="defaultTimeOpenValue" (ngModelChange)="verifyDateAndTime()"></nz-time-picker>
+    <button [disabled]="!IsAbleToCheckIn" class="fancy-button checkIn" (click)="checkIn()">Check In</button>
+</div>

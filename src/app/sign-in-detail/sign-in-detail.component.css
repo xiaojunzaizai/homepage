@@ -15,3 +15,39 @@
     background-size: 100% 2px;
 }
 
+.date-time-management{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+nz-date-picker{
+    width: 280px;
+    height: 40px;
+    top: 3rem;
+    /* left: 10rem; */
+}
+
+.ant-picker-input > input{
+    font-size: 18px;
+    vertical-align: middle;
+    margin-top: 18px;
+    pointer-events: none;
+}
+nz-time-picker{
+    width: 280px;
+    height: 40px;
+    top: 3rem;
+}
+
+.checkIn{
+    margin-top: 3rem;
+    background-color: transparent;
+    font-size: 1.2rem;
+    color: blueviolet;
+    cursor: pointer;
+    align-items: center;
+    border: 2px solid rgb(31, 160, 234);
+    display: flex;
+    padding-right: 4px;
+}

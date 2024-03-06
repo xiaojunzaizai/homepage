@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { InMemoryDbService, RequestInfo } from 'angular-in-memory-web-api';
-import { SignInUser } from './signInuser';
+import { SignInUser } from './signInUser';
 import { Observable } from 'rxjs';
+import { formatISO } from 'date-fns';
 
 @Injectable({
   providedIn: 'root'
@@ -10,9 +11,9 @@ export class InMemoryDataService implements InMemoryDbService{
    createDb() {
     const signInUsers = [
       {id:1, firstName:'first_name', middleName: 'middle_name',lastName: 'last_name',signDate:[
-        new Date('2024-02-20T00:00:00'),
-        new Date('2024-02-19T00:00:00'),
-        new Date('2024-02-18T00:00:00')]},
+        formatISO(new Date('2024-02-20T00:00:00')),
+        formatISO(new Date('2024-02-19T00:00:00')),
+        formatISO(new Date('2024-02-18T00:00:00'))]},
       {id: 2, firstName: 'John', middleName: 'William', lastName: 'Doe', signDate: [
           this.createDate(2024, 2, 20),
           this.createDate(2024, 2, 19),
@@ -22,8 +23,8 @@ export class InMemoryDataService implements InMemoryDbService{
     return {signInUsers};
   }
 
-  createDate(year: number, month: number, day: number): Date {
-    return new Date(year, month - 1, day);
+  createDate(year: number, month: number, day: number): String {
+    return formatISO(new Date(year, month - 1, day));
   }
 
   // Overrides the genId method to ensure that a signInUser always has an id.
