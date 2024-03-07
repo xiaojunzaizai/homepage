@@ -11,8 +11,10 @@ import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
 import { NzTimePickerModule } from 'ng-zorro-antd/time-picker';
 
+
 import { AppComponent } from './app.component';
 import { TopBarComponent } from './top-bar/top-bar.component';
+import { LoadingComponent } from './loading/loading.component';
 import { AppRoutingModule } from './app-routing.module';
 import { BodyComponent } from './body/body.component';
 import { HomeComponent } from './home/home.component';
@@ -56,6 +58,7 @@ registerLocaleData(en);
     TopBarComponent,
     BodyComponent,
     HomeComponent,
+    LoadingComponent,
     SignInDetailComponent
   ],
   bootstrap: [

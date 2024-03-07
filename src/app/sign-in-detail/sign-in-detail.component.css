@@ -25,7 +25,8 @@ nz-date-picker{
     width: 280px;
     height: 40px;
     top: 3rem;
-    /* left: 10rem; */
+    left: 15rem;
+    
 }
 
 .ant-picker-input > input{
@@ -38,10 +39,12 @@ nz-time-picker{
     width: 280px;
     height: 40px;
     top: 3rem;
+    left: 20rem;
 }
 
 .checkIn{
-    margin-top: 3rem;
+    margin-top: 2.9rem;
+    margin-left: 25rem;
     background-color: transparent;
     font-size: 1.2rem;
     color: blueviolet;

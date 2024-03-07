@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { SignInUserService } from '../sign-in-user.service';
 import { SignInUser } from '../signInUser';
-import { cleanUpDateAndTime, adjustMinutes, compareDateAndTime } from '../util-tool/utilManagement'
+import { cleanUpDateAndTime, adjustMinutes, compareDateAndTime, setDivVisibility } from '../util-tool/utilManagement';
 import DataTable from 'datatables.net-dt';
 declare var $: any;
 
@@ -20,13 +20,15 @@ export class SignInDetailComponent implements OnInit, AfterViewInit{
   selectedTime= adjustMinutes(new Date());
   defaultTimeOpenValue = new Date(0, 0, 0, 0, 0, 0);
   IsAbleToCheckIn?: boolean = false;
+  loading: boolean = true;
   constructor(
     private route: ActivatedRoute,
     private signInUserService: SignInUserService,
-    private location: Location
+    private location: Location,
   ) {}
 
   ngOnInit(): void{
+    setDivVisibility(this.loading);
     this.getsignInUserDetail();
   }
 
@@ -39,6 +41,8 @@ export class SignInDetailComponent implements OnInit, AfterViewInit{
       .subscribe(signInUser => {
         this.signInUser = signInUser;
         this.verifyDateAndTime();
+        this.loading = false;
+        setDivVisibility(this.loading);
         
       });
   }
@@ -68,6 +72,4 @@ export class SignInDetailComponent implements OnInit, AfterViewInit{
     }
     
   }
-
-
 }

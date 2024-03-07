@@ -1,16 +1,19 @@
-<div>
-    <h2 class="title">
-        <span>
-            Welcome Sign In User : {{signInUser?.firstName}}  {{signInUser?.middleName}}  {{signInUser?.lastName}}, Your Sign in User ID is {{signInUser?.id}}<br>
-            Please select date and time to complete sign in process !
-        </span>
-    </h2>
-</div>
-<div>
-    
-</div>
-<div class='date-time-management'> 
-    <nz-date-picker nzPlaceHolder="Please Select a Date" nzFormat="YYYY/MM/dd" nzInputReadOnly="true" nzShowToday="true" [(ngModel)]="selectedDate" (ngModelChange)="verifyDateAndTime()" ></nz-date-picker>
-    <nz-time-picker nzPlaceHolder="Please Select a Time" nzFormat="HH:mm"  nzInputReadOnly="true" [nzMinuteStep]="15" [(ngModel)]="selectedTime" [nzDefaultOpenValue]="defaultTimeOpenValue" (ngModelChange)="verifyDateAndTime()"></nz-time-picker>
-    <button [disabled]="!IsAbleToCheckIn" class="fancy-button checkIn" (click)="checkIn()">Check In</button>
+<app-loading [loading]="loading"></app-loading>
+<div id="toggleDiv">
+    <div>
+        <h2 class="title">
+            <span>
+                Welcome Sign In User : {{signInUser?.firstName}}  {{signInUser?.middleName}}  {{signInUser?.lastName}}, Your Sign in User ID is {{signInUser?.id}}<br>
+                Please select date and time to complete sign in process !
+            </span>
+        </h2>
+    </div>
+    <div>
+        
+    </div>
+    <div class='date-time-management'> 
+        <nz-date-picker nzPlaceHolder="Please Select a Date" nzFormat="YYYY/MM/dd" nzInputReadOnly="true" nzShowToday="true" [(ngModel)]="selectedDate" (ngModelChange)="verifyDateAndTime()" ></nz-date-picker>
+        <nz-time-picker nzPlaceHolder="Please Select a Time" nzFormat="HH:mm"  nzInputReadOnly="true" [nzMinuteStep]="15" [(ngModel)]="selectedTime" [nzDefaultOpenValue]="defaultTimeOpenValue" (ngModelChange)="verifyDateAndTime()"></nz-time-picker>
+        <button [disabled]="!IsAbleToCheckIn" class="fancy-button checkIn" (click)="checkIn()">Check In</button>
+    </div>
 </div>
