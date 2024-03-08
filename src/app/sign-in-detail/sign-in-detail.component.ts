@@ -2,6 +2,7 @@ import { AfterViewInit, Component, OnInit, ViewEncapsulation } from '@angular/co
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { SignInUserService } from '../sign-in-user.service';
+import { SignInAuthService } from '../sign-in-auth.service';
 import { SignInUser } from '../signInUser';
 import { cleanUpDateAndTime, adjustMinutes, compareDateAndTime, setDivVisibility } from '../util-tool/utilManagement';
 import DataTable from 'datatables.net-dt';
@@ -24,6 +25,7 @@ export class SignInDetailComponent implements OnInit, AfterViewInit{
   constructor(
     private route: ActivatedRoute,
     private signInUserService: SignInUserService,
+    private signInAuthService: SignInAuthService,
     private location: Location,
   ) {}
 
@@ -37,13 +39,14 @@ export class SignInDetailComponent implements OnInit, AfterViewInit{
 
   getsignInUserDetail(): void {
     const id = Number(this.route.snapshot.paramMap.get('id'));
+    this.signInAuthService.updateUserId(id);
     this.signInUserService.getSignInUser(id)
       .subscribe(signInUser => {
         this.signInUser = signInUser;
         this.verifyDateAndTime();
         this.loading = false;
         setDivVisibility(this.loading);
-        
+        console.log(this.signInUser);
       });
   }
 
@@ -66,8 +69,10 @@ export class SignInDetailComponent implements OnInit, AfterViewInit{
   //check in button
   checkIn(){
     const selectedDateAndTime = cleanUpDateAndTime(this.selectedDate,this.selectedTime);
-    if (this.IsAbleToCheckIn){
-      
+    if (this.IsAbleToCheckIn && this.signInUser){
+      console.log('check in ');
+      this.signInUser.signDate.push(selectedDateAndTime);
+      this.signInUserService.updateSignInUser(this.signInUser);
     }
     
   }

@@ -44,6 +44,8 @@ export class SignInUserService {
   }
 
   updateSignInUser(signInUser:SignInUser): Observable<any>{
+    console.log('update step');
+    console.log(signInUser);
     return this.http.put<SignInUser>(this.signInUsersUrl, signInUser, this.httpOptions).pipe(
       tap(_ =>this.log(`update signInUser id = ${signInUser.id}`)),
       catchError(this.handleError<any>(`updateSignInUser ${signInUser.firstName} ${signInUser.middleName} ${signInUser.lastName}`))

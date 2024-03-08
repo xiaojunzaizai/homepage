@@ -3,6 +3,7 @@ import { Observable, Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged,switchMap } from 'rxjs/operators';
 import { SignInUser } from '../signInUser';
 import { SignInUserService } from '../sign-in-user.service';
+import { SignInAuthService } from '../sign-in-auth.service';
 
 @Component({
   selector: 'app-home',
@@ -20,7 +21,8 @@ export class HomeComponent implements OnInit {
 
   selectedSignInUser : SignInUser | null = null;
 
-  constructor (private signInUserService: SignInUserService){}
+  constructor (private signInUserService: SignInUserService,
+    private signInAuthService: SignInAuthService){}
 
   ngOnInit(): void{
     this.signInUsers$ = this.searchTerms.pipe(
@@ -33,6 +35,7 @@ export class HomeComponent implements OnInit {
            // switch to new search observable each time the term changes
            switchMap((term: string)=>this.signInUserService.searchSignInUser(term)),
     );
+    this.signInAuthService.updateUserId(null);
   }
 
   search(term: string): void{
