@@ -66,13 +66,19 @@ export class SignInDetailComponent implements OnInit, AfterViewInit{
       }
   }
 
+  reload():void{
+    // window.location.reload();
+    this.loading = true;
+    setDivVisibility(this.loading);
+    this.getsignInUserDetail()
+  }
+
   //check in button
   checkIn(){
     const selectedDateAndTime = cleanUpDateAndTime(this.selectedDate,this.selectedTime);
     if (this.IsAbleToCheckIn && this.signInUser){
-      console.log('check in ');
       this.signInUser.signDate.push(selectedDateAndTime);
-      this.signInUserService.updateSignInUser(this.signInUser);
+      this.signInUserService.updateSignInUser(this.signInUser).subscribe(()=>this.reload());
     }
     
   }
