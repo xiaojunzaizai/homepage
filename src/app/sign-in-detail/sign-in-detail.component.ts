@@ -65,10 +65,9 @@ export class SignInDetailComponent implements OnInit, AfterViewInit{
 
   //check in button
   checkIn(){
-    console.log(this.selectedDate);
-    console.log(this.selectedTime);
-    if(this.selectedTime){
-      console.log(cleanUpDateAndTime(this.selectedDate,this.selectedTime));
+    const selectedDateAndTime = cleanUpDateAndTime(this.selectedDate,this.selectedTime);
+    if (this.IsAbleToCheckIn){
+      
     }
     
   }

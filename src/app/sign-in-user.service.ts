@@ -43,6 +43,20 @@ export class SignInUserService {
     );
   }
 
+  updateSignInUser(signInUser:SignInUser): Observable<any>{
+    return this.http.put<SignInUser>(this.signInUsersUrl, signInUser, this.httpOptions).pipe(
+      tap(_ =>this.log(`update signInUser id = ${signInUser.id}`)),
+      catchError(this.handleError<any>(`updateSignInUser ${signInUser.firstName} ${signInUser.middleName} ${signInUser.lastName}`))
+    )
+  }
+
+  addSignInUser(signInUser:SignInUser): Observable<SignInUser>{
+    return this.http.post<SignInUser>(this.signInUsersUrl, signInUser, this.httpOptions).pipe(
+      tap( (newSignInUser: SignInUser)=>this.log(`add SignInUser w/ id = ${newSignInUser.id}`)),
+      catchError(this.handleError<any>(`addSignInUser failed`))
+    )
+  }
+
   private handleError<T>(operation='operation', result?:T){
     return (error:any): Observable<T> => {
       // TODO: send the error to remote logging infrastructure
