@@ -93,9 +93,14 @@ label {
 
 .button:disabled, button:disabled {
   opacity: 0.2;
-  cursor: auto;
+  /* cursor: auto; */
+  color: grey;
+  cursor: not-allowed;
 }
-
+.button.disabled {
+  color: grey;
+  cursor: not-allowed;
+}
 /* Fancy Button */
 
 .fancy-button {

@@ -4,6 +4,7 @@ import { SignInUserService } from '../sign-in-user.service';
 import { SignInUser } from '../signInUser';
 import { SignInAuthService } from '../sign-in-auth.service';
 import { Subscription } from 'rxjs';
+import { toggleLinkDisabled } from '../util-tool/disableATagClickUtil';
 
 @Component({
   selector: 'app-top-bar',
@@ -15,6 +16,7 @@ homeToolTip = 'home';
 selectedUserToolTip = '';
 selectedUser=false;
 signInUser: SignInUser | undefined;
+disableAddSignInUser: boolean=true;
 userId: number | null = null;
 private subscription: Subscription = new Subscription();
 
@@ -30,6 +32,7 @@ ngOnInit(): void{
     if (id) {
       this.getsignInUserDetail(id);
     } else {
+      this.disableAddSignInUser=false;
       this.selectedUser=false;
     }
   }));
@@ -43,6 +46,9 @@ getsignInUserDetail(id: number): void {
       this.selectedUserToolTip = `${signInUser.firstName} ${signInUser.middleName} ${signInUser.lastName}`;
     });
   } else{
+    if (id === -1) {
+      this.disableAddSignInUser = true;
+    }
     this.selectedUser=false; 
   }
 }
