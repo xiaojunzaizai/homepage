@@ -13,6 +13,7 @@ import { NzTimePickerModule } from 'ng-zorro-antd/time-picker';
 
 
 import { AppComponent } from './app.component';
+import { AddSignInUserComponent } from './add-sign-in-user/add-sign-in-user.component';
 import { TopBarComponent } from './top-bar/top-bar.component';
 import { LoadingComponent } from './loading/loading.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -54,6 +55,7 @@ registerLocaleData(en);
     
   ],
   declarations: [
+    AddSignInUserComponent,
     AppComponent,
     TopBarComponent,
     BodyComponent,
