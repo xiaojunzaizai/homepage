@@ -8,7 +8,7 @@
 </a>
 <!-- <button *ngIf="selectedUser" class="material-icons" style="color: black;" [ngbTooltip]="deleteToolTip" placement="bottom">delete_forever</button> -->
 <span class="material-icons" *ngIf="selectedUser" [ngbTooltip]="selectedUserToolTip">account_circle</span>
-<a class="button fancy-button" *ngIf="!selectedUser">
+<a class="button fancy-button" *ngIf="!selectedUser" routerLink="/addSignInUser">
     <span class="material-icons" style="color: wheat;">person_add </span>
 </a>
 

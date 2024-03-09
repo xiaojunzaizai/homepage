@@ -46,7 +46,6 @@ export class SignInDetailComponent implements OnInit, AfterViewInit{
         this.verifyDateAndTime();
         this.loading = false;
         setDivVisibility(this.loading);
-        console.log(this.signInUser);
       });
   }
 
