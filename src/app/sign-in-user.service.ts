@@ -44,8 +44,6 @@ export class SignInUserService {
   }
 
   updateSignInUser(signInUser:SignInUser): Observable<any>{
-    console.log('update step');
-    console.log(signInUser);
     return this.http.put<SignInUser>(this.signInUsersUrl, signInUser, this.httpOptions).pipe(
       tap(_ =>this.log(`update signInUser id = ${signInUser.id}`)),
       catchError(this.handleError<any>(`updateSignInUser ${signInUser.firstName} ${signInUser.middleName} ${signInUser.lastName}`))
@@ -59,19 +57,22 @@ export class SignInUserService {
     )
   }
 
-  private handleError<T>(operation='operation', result?:T){
-    return (error:any): Observable<T> => {
-      // TODO: send the error to remote logging infrastructure
+  private handleError<T>(operation = 'operation', result?: T) {
+    return (error: any): Observable<T> => {
       console.error(error); // log to console instead
-
-      // TODO: better job of transforming error for user consumption
+  
+      // Adding more detailed error information
+      console.error(`${operation} failed: `, error.message);
+      if (error.error) {
+        console.error(`Server response: `, error.error);
+      }
+  
       this.log(`${operation} failed: ${error.message}`);
-
-      // Let the app keep running by returning an empty result.
-
+  
       return of(result as T);
-    }
+    };
   }
+  
 
   private log (message:string ){
     console.log(`SignInUserService: ${message}`);

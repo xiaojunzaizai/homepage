@@ -70,7 +70,7 @@ export class SignInDetailComponent implements OnInit, AfterViewInit{
     // window.location.reload();
     this.loading = true;
     setDivVisibility(this.loading);
-    this.getsignInUserDetail()
+    this.getsignInUserDetail();
   }
 
   //check in button
