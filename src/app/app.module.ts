@@ -10,6 +10,7 @@ import { FormsModule } from '@angular/forms';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
 import { NzTimePickerModule } from 'ng-zorro-antd/time-picker';
+import { NgZorroAntdModule } from './ng-zorro-antd/ng-zorro-antd.module';
 
 
 import { AppComponent } from './app.component';
@@ -21,6 +22,7 @@ import { BodyComponent } from './body/body.component';
 import { HomeComponent } from './home/home.component';
 import { SignInDetailComponent } from './sign-in-detail/sign-in-detail.component';
 import { IconsProviderModule } from './icons-provider.module';
+import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzLayoutModule } from 'ng-zorro-antd/layout';
 import { NzMenuModule } from 'ng-zorro-antd/menu';
 import { NZ_I18N } from 'ng-zorro-antd/i18n';
@@ -43,12 +45,14 @@ registerLocaleData(en);
       InMemoryDataService, { dataEncapsulation: false , delay: 500}
     ),
     NgbModule,
+    NgZorroAntdModule,
     NzButtonModule,
     NzDatePickerModule,
     NzTimePickerModule,
     ReactiveFormsModule,
     RouterModule,
     IconsProviderModule,
+    NzInputModule,
     NzLayoutModule,
     NzMenuModule,
     BrowserAnimationsModule
