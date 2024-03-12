@@ -53,7 +53,6 @@ export class SignInUserService {
   }
 
   addSignInUser(signInUser:SignInUser): Observable<SignInUser>{
-    consoleLog('SignInUserService',signInUser);
     return this.http.post<SignInUser>(this.signInUsersUrl, signInUser, this.httpOptions).pipe(
       tap( (newSignInUser: SignInUser)=>consoleLog('SignInUserService',`add SignInUser w/ id = ${newSignInUser.id}`)),
       catchError(this.handleError<any>(`addSignInUser failed`))
