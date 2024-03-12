@@ -1,4 +1,57 @@
-<nz-input-group *nzSpaceItem [nzPrefix]="prefixTemplateClock" nzStatus="warning">
-    <input type="text" nz-input placeholder="Warning with prefix" />
-  </nz-input-group>
-  <ng-template #prefixTemplateClock><span nz-icon nzType="clock-circle" nzTheme="outline"></span></ng-template>
+<div>
+  <h2 class="title">
+    <span>
+      Welcome New User !!!<br>
+    Please fullfill your name to complete the registration !
+    </span>
+  </h2>
+</div>
+<div class="addUserInput">
+  <form nz-form [formGroup]="validateAddUserForm" nzNoColon="true" (ngSubmit)="submitForm()">
+    <nz-form-item>
+      <nz-form-label nzFor="firstName" nzRequired="true" [nzSm]="6" [nzXs]="24"></nz-form-label>
+      <nz-form-control [nzSm]="20" [nzXs]="35" nzErrorTip="Please Enter your First Name !">
+        <nz-input-group [nzPrefix]="prefixTemplateUser" [nzAddOnBefore]="FirstName">
+          <ng-template #FirstName>
+            <div class="nameLabel">
+              <span>First Name</span>
+            </div>
+          </ng-template>
+          <input  nz-input type="text" formControlName="firstName" id="firstName" placeholder="Please Enter Your First Name" />
+        </nz-input-group>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label nzFor="middleName" nzRequired="false" class="optional-field" [nzSm]="6" [nzXs]="24"></nz-form-label>
+      <nz-form-control [nzSm]="20" [nzXs]="35" >
+        <nz-input-group [nzPrefix]="prefixTemplateUser" [nzAddOnBefore]="MiddleName">
+          <ng-template #MiddleName >
+            <div class="nameLabel" >
+              <span >Middle Name</span>
+            </div>
+          </ng-template>
+          <input  nz-input type="text" formControlName="middleName" id="middleName" placeholder="Please Enter Your Middle Name" />
+        </nz-input-group>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label nzFor="lastName" nzRequired="true" [nzSm]="6" [nzXs]="24"></nz-form-label>
+      <nz-form-control [nzSm]="20" [nzXs]="35" nzErrorTip="Please Enter your Last Name !">
+        <nz-input-group [nzPrefix]="prefixTemplateUser" [nzAddOnBefore]="LastName">
+          <ng-template #LastName>
+            <div class="nameLabel">
+              <span>Last Name</span>
+            </div>
+          </ng-template>
+          <input  nz-input type="text" formControlName="lastName" id="lastName" placeholder="Please Enter Your Last Name" />
+        </nz-input-group>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item nz-row class="register-area">
+      <nz-form-control [nzSpan]="14" [nzOffset]="12">
+        <button class="registerButton" nzType="primary">Register</button>
+      </nz-form-control>
+    </nz-form-item>
+    <ng-template #prefixTemplateUser><span class="material-icons">person</span></ng-template>
+  </form>
+</div>

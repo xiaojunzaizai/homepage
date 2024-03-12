@@ -3,6 +3,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { SignInUser } from './signInUser';
 import { Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
+import { consoleLog, consoleError } from './util-tool/messageConsoleUtil';
+
 
 @Injectable({
   providedIn: 'root'
@@ -29,8 +31,8 @@ export class SignInUserService {
         signInUser.lastName.toLowerCase().includes(term.toLowerCase())
       )),
       tap(x => x.length ?
-         this.log(`found SignInUsers matching "${term}"`) :
-         this.log(`no SignInUsers matching "${term}"`)),
+        consoleLog('SignInUserService',`found SignInUsers matching "${term}"`) :
+        consoleLog('SignInUserService',`no SignInUsers matching "${term}"`)),
       catchError(this.handleError<SignInUser[]>('searchSignInUsers', []))
     );
   }
@@ -38,44 +40,39 @@ export class SignInUserService {
   getSignInUser(id: number): Observable<SignInUser> {
     const url = `${this.signInUsersUrl}/${id}`;
     return this.http.get<SignInUser>(url).pipe(
-      tap(_ => this.log(`fetched SignInUser id = ${id}`)),
+      tap(_ => consoleLog('SignInUserService',`fetched SignInUser id = ${id}`)),
       catchError(this.handleError<SignInUser>(`getSignInUser id =${id}`))
     );
   }
 
   updateSignInUser(signInUser:SignInUser): Observable<any>{
     return this.http.put<SignInUser>(this.signInUsersUrl, signInUser, this.httpOptions).pipe(
-      tap(_ =>this.log(`update signInUser id = ${signInUser.id}`)),
+      tap(_ =>consoleLog('SignInUserService',`update signInUser id = ${signInUser.id}`)),
       catchError(this.handleError<any>(`updateSignInUser ${signInUser.firstName} ${signInUser.middleName} ${signInUser.lastName}`))
     )
   }
 
   addSignInUser(signInUser:SignInUser): Observable<SignInUser>{
     return this.http.post<SignInUser>(this.signInUsersUrl, signInUser, this.httpOptions).pipe(
-      tap( (newSignInUser: SignInUser)=>this.log(`add SignInUser w/ id = ${newSignInUser.id}`)),
+      tap( (newSignInUser: SignInUser)=>consoleLog('SignInUserService',`add SignInUser w/ id = ${newSignInUser.id}`)),
       catchError(this.handleError<any>(`addSignInUser failed`))
     )
   }
 
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
-      console.error(error); // log to console instead
+      consoleError('SignInUserService',error); // log to console instead
   
       // Adding more detailed error information
-      console.error(`${operation} failed: `, error.message);
+      consoleError(`${operation} failed`, error.message);
       if (error.error) {
-        console.error(`Server response: `, error.error);
+        consoleError(`Server response`, error.error);
       }
   
-      this.log(`${operation} failed: ${error.message}`);
+      consoleLog(`${operation} failed`, error.message);
   
       return of(result as T);
     };
-  }
-  
-
-  private log (message:string ){
-    console.log(`SignInUserService: ${message}`);
   }
 
 }

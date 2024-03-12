@@ -1,0 +1,49 @@
+.addUserInput{
+    width: 30rem;
+    max-width: 60rem;
+    margin-top: 3rem;
+    margin-left: 20rem;
+    flex-direction: column;
+    justify-content: center;
+} 
+
+.registerButton{
+    background-color: #4c22f5; /* 按钮背景色 */
+    color: #ffffff; /* 按钮文字颜色 */
+    border-color: #f5222d; /* 按钮边框颜色，如果需要 */
+}
+
+[nz-form] {
+    max-width: 600px;
+}
+
+.register-are {
+    margin-bottom: 8px;
+}
+.nameLabel{
+    width: 80px;
+}
+.optional-field::before {
+    content: '';
+    display: inline-block;
+    width: 8px; /* 或者根据星号的实际宽度调整 */
+    height: 8px; /* 调整以适应实际高度 */
+    visibility: hidden; /* 使其不可见，但仍占据空间 */
+}
+.title{
+    color: #333;
+    line-height: 2;
+    text-align: center;
+    margin-top: 10rem;
+    margin-left: 17rem;
+    font-size: 30px;
+}
+.title span {
+    background: linear-gradient(to right, red, purple ) no-repeat right bottom;
+    background-size: 0 2px;
+    transition: background-size 1s;
+}
+.title span:hover{
+    background-position: left bottom;
+    background-size: 100% 2px;
+}
