@@ -49,7 +49,7 @@
     </nz-form-item>
     <nz-form-item nz-row class="register-area">
       <nz-form-control [nzSpan]="14" [nzOffset]="12">
-        <button class="registerButton" nzType="primary">Register</button>
+        <button nz-button nzLoading class="registerButton" nzType="primary" [nzLoading]="isLoading" [disabled]="isDisable">Register</button>
       </nz-form-control>
     </nz-form-item>
     <ng-template #prefixTemplateUser><span class="material-icons">person</span></ng-template>

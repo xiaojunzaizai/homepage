@@ -2,4 +2,5 @@
 export {cleanUpDateAndTime, adjustMinutes, compareDateAndTime} from "./dateTimeUtil";
 export { setDivVisibility } from "./loadingUtil";
 export {toggleLinkDisabled,preventDefaultClick} from "./disableATagClickUtil";
-export {consoleLog, consoleError} from './messageConsoleUtil'
+export {consoleLog, consoleError} from './messageConsoleUtil';
+export { formatForm} from './formUtil';

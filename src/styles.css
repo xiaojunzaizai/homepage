@@ -2,7 +2,7 @@
 
 * {
   font-family: 'Roboto', Arial, sans-serif;
-  color: #616161;
+  color: #000000; /* 字体颜色 */
   box-sizing: border-box;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -80,7 +80,6 @@ label {
   border-radius: 2px;
   font-size: 14px;
   cursor: pointer;
-  /* background-color: #1976d2; */
   background-color: transparent;
   color: white;
   border: none;
@@ -104,8 +103,6 @@ label {
 /* Fancy Button */
 
 .fancy-button {
-  /* background-color: white; */
-  /* color: #1976d2; */
   background-color: transparent;
   color: #ffffff;
 }

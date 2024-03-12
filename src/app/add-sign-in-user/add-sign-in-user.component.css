@@ -1,16 +1,15 @@
 .addUserInput{
     width: 30rem;
     max-width: 60rem;
-    margin-top: 3rem;
+    margin-top: 5rem;
     margin-left: 20rem;
     flex-direction: column;
     justify-content: center;
 } 
+.registerButton, button.nz-button {
+    background-color: #4c22f5a7; /* 按钮背景色 */
+    border-color: #bd22f5a9; /* 按钮边框颜色，如果需要 */
 
-.registerButton{
-    background-color: #4c22f5; /* 按钮背景色 */
-    color: #ffffff; /* 按钮文字颜色 */
-    border-color: #f5222d; /* 按钮边框颜色，如果需要 */
 }
 
 [nz-form] {
@@ -34,7 +33,7 @@
     color: #333;
     line-height: 2;
     text-align: center;
-    margin-top: 10rem;
+    margin-top: 7rem;
     margin-left: 17rem;
     font-size: 30px;
 }
