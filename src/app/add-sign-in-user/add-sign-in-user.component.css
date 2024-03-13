@@ -7,9 +7,15 @@
     justify-content: center;
 } 
 .registerButton, button.nz-button {
+    margin-top: 1rem;
     background-color: #4c22f5a7; /* 按钮背景色 */
     border-color: #bd22f5a9; /* 按钮边框颜色，如果需要 */
 
+}
+.user-exist-message {
+    margin-left: 10rem;
+    color: red; /* 或者你想要的任何样式 */
+    text-align: center;
 }
 
 [nz-form] {

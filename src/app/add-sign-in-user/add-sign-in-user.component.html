@@ -11,7 +11,7 @@
     <nz-form-item>
       <nz-form-label nzFor="firstName" nzRequired="true" [nzSm]="6" [nzXs]="24"></nz-form-label>
       <nz-form-control [nzSm]="20" [nzXs]="35" nzErrorTip="Please Enter your First Name !">
-        <nz-input-group [nzPrefix]="prefixTemplateUser" [nzAddOnBefore]="FirstName">
+        <nz-input-group [nzPrefix]="prefixTemplateUser" [nzAddOnBefore]="FirstName" [nzStatus]="isUserExist?'error':''">
           <ng-template #FirstName>
             <div class="nameLabel">
               <span>First Name</span>
@@ -24,7 +24,7 @@
     <nz-form-item>
       <nz-form-label nzFor="middleName" nzRequired="false" class="optional-field" [nzSm]="6" [nzXs]="24"></nz-form-label>
       <nz-form-control [nzSm]="20" [nzXs]="35" >
-        <nz-input-group [nzPrefix]="prefixTemplateUser" [nzAddOnBefore]="MiddleName">
+        <nz-input-group [nzPrefix]="prefixTemplateUser" [nzAddOnBefore]="MiddleName" [nzStatus]="isUserExist?'error':''">
           <ng-template #MiddleName >
             <div class="nameLabel" >
               <span >Middle Name</span>
@@ -37,17 +37,20 @@
     <nz-form-item>
       <nz-form-label nzFor="lastName" nzRequired="true" [nzSm]="6" [nzXs]="24"></nz-form-label>
       <nz-form-control [nzSm]="20" [nzXs]="35" nzErrorTip="Please Enter your Last Name !">
-        <nz-input-group [nzPrefix]="prefixTemplateUser" [nzAddOnBefore]="LastName">
+        <nz-input-group [nzPrefix]="prefixTemplateUser" [nzAddOnBefore]="LastName" [nzStatus]="isUserExist?'error':''">
           <ng-template #LastName>
             <div class="nameLabel">
               <span>Last Name</span>
             </div>
           </ng-template>
-          <input  nz-input type="text" formControlName="lastName" id="lastName" placeholder="Please Enter Your Last Name" />
+          <input  nz-input type="text" formControlName="lastName" id="lastName" placeholder="Please Enter Your Last Name"/>
         </nz-input-group>
       </nz-form-control>
     </nz-form-item>
     <nz-form-item nz-row class="register-area">
+      <div *ngIf="isUserExist" >
+        <span class="user-exist-message">User exists, please use different name !</span>
+      </div>
       <nz-form-control [nzSpan]="14" [nzOffset]="12">
         <button nz-button nzLoading class="registerButton" nzType="primary" [nzLoading]="isLoading" [disabled]="isDisable">Register</button>
       </nz-form-control>

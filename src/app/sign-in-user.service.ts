@@ -36,6 +36,37 @@ export class SignInUserService {
       catchError(this.handleError<SignInUser[]>('searchSignInUsers', []))
     );
   }
+  searchSignInUserByFirstName(term: string): Observable<SignInUser[]> {
+    if (!term.trim()) {
+      // 如果没有搜索词，直接返回空数组。
+      return of([]);
+    }
+    return this.http.get<SignInUser[]>(this.signInUsersUrl).pipe(
+      map(signInUsers => signInUsers.filter(signInUser => 
+        signInUser.firstName.toLowerCase()===term.toLowerCase()
+      )),
+      tap(x => x.length ?
+        consoleLog('SignInUserService',`found SignInUsers matching "${term}"`) :
+        consoleLog('SignInUserService',`no SignInUsers matching "${term}"`)),
+      catchError(this.handleError<SignInUser[]>('searchSignInUsers', []))
+    );
+  }
+
+  searchSignInUserByLastName(term: string): Observable<SignInUser[]> {
+    if (!term.trim()) {
+      // 如果没有搜索词，直接返回空数组。
+      return of([]);
+    }
+    return this.http.get<SignInUser[]>(this.signInUsersUrl).pipe(
+      map(signInUsers => signInUsers.filter(signInUser =>
+        signInUser.lastName.toLowerCase() === term.toLowerCase()
+      )),
+      tap(x => x.length ?
+        consoleLog('SignInUserService',`found SignInUsers matching "${term}"`) :
+        consoleLog('SignInUserService',`no SignInUsers matching "${term}"`)),
+      catchError(this.handleError<SignInUser[]>('searchSignInUsers', []))
+    );
+  }
 
   getSignInUser(id: number): Observable<SignInUser> {
     const url = `${this.signInUsersUrl}/${id}`;

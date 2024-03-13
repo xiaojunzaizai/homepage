@@ -4,7 +4,8 @@ import { SignInAuthService } from '../sign-in-auth.service';
 import { SignInUserService } from '../sign-in-user.service';
 import { SignInUser } from '../signInUser';
 import { AbstractControl, FormControl, FormGroup, NonNullableFormBuilder, ValidatorFn, Validators } from '@angular/forms';
-import { consoleLog, consoleError, formatForm } from '../util-tool/utilManagement';
+import { consoleLog, consoleError, formatForm, isExistedByFirstname, isExistedByLastname } from '../util-tool/utilManagement';
+import { catchError, forkJoin, map, of, switchMap } from 'rxjs';
 
 
 @Component({
@@ -16,6 +17,7 @@ export class AddSignInUserComponent implements OnInit {
 
   isLoading:boolean=false;
   isDisable:boolean=false;
+  isUserExist: boolean = false;
 
   validateAddUserForm!: FormGroup<{
     firstName: FormControl<string>;
@@ -43,35 +45,49 @@ export class AddSignInUserComponent implements OnInit {
   submitForm(): void {
     this.isLoading = true;
     this.isDisable = true;
-    if (this.validateAddUserForm.valid) {
-      setTimeout(() => {
-        this.isLoading = false;
-        this.isDisable = false;
-      }, 5000);
-      consoleLog('submit', this.validateAddUserForm.value);
-      const newUser: SignInUser= formatForm(this.validateAddUserForm.value);
-      this.signInUserService.addSignInUser(newUser).subscribe({
-        next: (newSignInUser) => {
-          // 处理成功响应
-          consoleLog('User added successfully', newSignInUser);
-          this.router.navigate(['/home']);
-          // 可以在这里做一些成功后的逻辑，比如跳转页面或显示通知
-        },
-        error: (error) => {
-          // 处理错误响应
-          consoleError('Error adding user', error);
-          // 可以在这里处理错误，比如显示错误消息
+    const { firstName,middleName, lastName } = this.validateAddUserForm.value;
+    const newUser: SignInUser= formatForm(this.validateAddUserForm.value);
+
+  if (this.validateAddUserForm.valid && firstName &&lastName) {
+    forkJoin({
+      firstNameExist: this.signInUserService.searchSignInUserByFirstName(firstName),
+      lastNameExist: this.signInUserService.searchSignInUserByLastName(lastName),
+    }).pipe(
+      switchMap(({ firstNameExist, lastNameExist }) => {
+        if (firstNameExist.length > 0 && lastNameExist.length > 0 && (isExistedByFirstname(firstNameExist,lastName,middleName) || isExistedByLastname(lastNameExist,firstName,middleName))) {
+          consoleLog('AddSignInUserComponent','User with the same first name or last name already exists.');
+          return of(null); // Indicates duplication
+        } else {
+          return this.signInUserService.addSignInUser(formatForm(this.validateAddUserForm.value));
         }
-      });
-    } else {
-      Object.values(this.validateAddUserForm.controls).forEach(control => {
-        if (control.invalid) {
-          this.isLoading = false;
-          this.isDisable = false;
-          control.markAsDirty();
-          control.updateValueAndValidity({ onlySelf: true });
-        }
-      });
-    }
+      }),
+      catchError(error => {
+        consoleError('Error checking user', error);
+        return of(null);
+      })
+    ).subscribe(result => {
+      if (result) {
+        // Only navigates if the user was successfully added (no duplication found)
+        consoleLog('AddSignInUserComponent : `User added successfully', result);
+        this.isUserExist = false;
+        this.router.navigate(['/home']);
+      } else {
+        // Handle duplication or error
+        this.isUserExist = true;
+        consoleLog('AddSignInUserComponent','User was not added due to duplication or an error');
+      }
+    });
+  } else {
+    Object.values(this.validateAddUserForm.controls).forEach(control => {
+      if (control.invalid) {
+        control.markAsDirty();
+        control.updateValueAndValidity({ onlySelf: true });
+      }
+    });
+  }
+  setTimeout(() => {
+    this.isLoading = false;
+    this.isDisable = false;
+  }, 2500);
   }
 }
