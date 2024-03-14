@@ -26,10 +26,9 @@ export class HomeComponent implements OnInit {
 
   isExisted: boolean = true;
 
-  isChecked: boolean = false;
-
   validateSearchUserForm!: FormGroup<{
     selectedSignInUserId: FormControl<number |null>;
+    isChecked: FormControl<boolean>;
   }>;
 
 
@@ -39,21 +38,23 @@ export class HomeComponent implements OnInit {
     private tokenService: TokenService,
     private fb: NonNullableFormBuilder){
       this.validateSearchUserForm=this.fb.group({
-        selectedSignInUserId:this.fb.control<number | null>(null, Validators.required)
+        selectedSignInUserId:this.fb.control<number | null>(null, Validators.required),
+        isChecked:this.fb.control<boolean>(false,Validators.requiredTrue)
       });
     }
 
   ngOnInit(): void{
     this.tokenService.clearToken();
     this.searchTerms.pipe(
-           // wait 300ms after each keystroke before considering the term
-           debounceTime(300),
 
-           // ignore new term if same as previous term
-           distinctUntilChanged(),
-     
-           // switch to new search observable each time the term changes
-           switchMap((term: string)=>this.signInUserService.searchSignInUser(term)),
+      // wait 300ms after each keystroke before considering the term
+      debounceTime(300),
+
+      // ignore new term if same as previous term
+      distinctUntilChanged(),
+
+      // switch to new search observable each time the term changes
+      switchMap((term: string)=>this.signInUserService.searchSignInUser(term)),
     ).subscribe(users => {
       // Directly update this.signInUsers with the new users
       this.signInUsers = users;
@@ -76,13 +77,14 @@ filterOption(searchValue: string, itemValue: any): boolean {
 
   submitForm():void{
     if(this.validateSearchUserForm.valid){
-      consoleLog('HomeComponent', this.validateSearchUserForm.value.selectedSignInUserId);
       if(this.validateSearchUserForm.value.selectedSignInUserId){
         this.isExisted = true;
-        if(this.isChecked){
-          const token = this.tokenService.generateToken();
-          this.router.navigate([`/signInDetail/${this.validateSearchUserForm.value.selectedSignInUserId}`],{ queryParams: { signInToken: token } });
+        let token = null;
+        if(this.validateSearchUserForm.value.isChecked){
+          token = this.tokenService.generateToken();
+          consoleLog('HomeComponent', this.validateSearchUserForm.value.selectedSignInUserId);
         }
+        this.router.navigate([`/signInDetail/${this.validateSearchUserForm.value.selectedSignInUserId}`],{ queryParams: { signInToken: token } });
       } else {
         this.isExisted = false;
       }

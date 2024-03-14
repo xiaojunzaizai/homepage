@@ -27,13 +27,19 @@
         </nz-form-item>
         <nz-form-item nz-row>
             <nz-form-control [nzSpan]="10" [nzOffset]="12">
-                <button nz-button nz-tooltip class="signIn" nzType="primary" nzShape="round" [nzTooltipTitle]="signInToolTip" [disabled]="!validateSearchUserForm.valid">
+                <button nz-button nz-tooltip class="signIn" nzType="primary" nzShape="round" [nzTooltipTitle]="signInToolTip" [disabled]="!validateSearchUserForm.value.selectedSignInUserId">
                     <span class="material-icons signInIcon"  >assignment</span>
                     Sign In</button>
             </nz-form-control>
         </nz-form-item>
+        <nz-form-item nzHasError>
+            <nz-form-control>
+                <div *ngIf="validateSearchUserForm.value.selectedSignInUserId">
+                    <br>
+                    <br>
+                    <label nz-checkbox formControlName="isChecked" id="isChecked">I Am Human</label>
+                </div>
+            </nz-form-control>
+        </nz-form-item>
     </form>
-</div>
-<div *ngIf="validateSearchUserForm.valid">
-    <label  nz-checkbox [(ngModel)]="isChecked">I Am Human</label>
 </div>

@@ -19,7 +19,6 @@
 .loading-icon {
     margin-right: 8px;
 }
-  
 
 .home{
     display: flex;
@@ -34,7 +33,7 @@ label {
     text-transform: none;
     font-weight: bold;
     margin-top: 1rem;
-    margin-left: 35rem;
+    margin-left: -25rem;
 }
 
 .title{
@@ -54,4 +53,3 @@ label {
     background-position: left bottom;
     background-size: 100% 2px;
 }
-
