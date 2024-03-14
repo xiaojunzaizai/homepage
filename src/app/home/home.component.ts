@@ -7,6 +7,7 @@ import { SignInUserService } from '../services/sign-in-user.service';
 import { SignInAuthService } from '../services/sign-in-auth.service';
 import { FormControl, FormGroup, NonNullableFormBuilder, Validators } from '@angular/forms';
 import { consoleLog, consoleError } from '../util-tool/utilManagement';
+import { TokenService } from '../services/token.service';
 
 
 @Component({
@@ -25,6 +26,8 @@ export class HomeComponent implements OnInit {
 
   isExisted: boolean = true;
 
+  isChecked: boolean = false;
+
   validateSearchUserForm!: FormGroup<{
     selectedSignInUserId: FormControl<number |null>;
   }>;
@@ -33,6 +36,7 @@ export class HomeComponent implements OnInit {
   constructor (private signInUserService: SignInUserService,
     private signInAuthService: SignInAuthService,
     private router: Router,
+    private tokenService: TokenService,
     private fb: NonNullableFormBuilder){
       this.validateSearchUserForm=this.fb.group({
         selectedSignInUserId:this.fb.control<number | null>(null, Validators.required)
@@ -40,6 +44,7 @@ export class HomeComponent implements OnInit {
     }
 
   ngOnInit(): void{
+    this.tokenService.clearToken();
     this.searchTerms.pipe(
            // wait 300ms after each keystroke before considering the term
            debounceTime(300),
@@ -74,7 +79,10 @@ filterOption(searchValue: string, itemValue: any): boolean {
       consoleLog('HomeComponent', this.validateSearchUserForm.value.selectedSignInUserId);
       if(this.validateSearchUserForm.value.selectedSignInUserId){
         this.isExisted = true;
-        this.router.navigate([`/signInDetail/${this.validateSearchUserForm.value.selectedSignInUserId}`]);
+        if(this.isChecked){
+          const token = this.tokenService.generateToken();
+          this.router.navigate([`/signInDetail/${this.validateSearchUserForm.value.selectedSignInUserId}`],{ queryParams: { signInToken: token } });
+        }
       } else {
         this.isExisted = false;
       }

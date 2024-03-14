@@ -4,11 +4,12 @@ import { AddSignInUserComponent } from './add-sign-in-user/add-sign-in-user.comp
 import { HomeComponent } from './home/home.component';
 import { BodyComponent } from './body/body.component';
 import { SignInDetailComponent } from './sign-in-detail/sign-in-detail.component';
+import { authGuard } from './auth/auth.guard';
 
 const routes: Routes = [
   {path: 'home', component: HomeComponent},
   {path: 'signIn', component: BodyComponent},
-  {path: 'signInDetail/:id', component: SignInDetailComponent},
+  {path: 'signInDetail/:id', component: SignInDetailComponent, canActivate: [authGuard]},
   {path: 'addSignInUser', component: AddSignInUserComponent},
   {path: '', redirectTo: '/home', pathMatch: 'full'}
 ];
