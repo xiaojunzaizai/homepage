@@ -17,11 +17,11 @@
                 [nzShowArrow]="false" [nzFilterOption]="filterOption" (nzOnSearch)="search($event)" [nzStatus]="isExisted?'':'error'">
                     <ng-container *ngFor="let o of signInUsers">
                         <nz-option *ngIf="!isLoading" [nzLabel]="o.firstName + '  ' + o.middleName + '  ' + o.lastName" [nzValue]="o.id"></nz-option>
-                      </ng-container>
+                    </ng-container>
                     <nz-option *ngIf="isLoading" nzDisabled nzCustomContent>
                         <span nz-icon nzType="loading" class="loading-icon"></span>
                         Loading Data...
-                      </nz-option>
+                    </nz-option>
                 </nz-select>
             </nz-form-control>
         </nz-form-item>
@@ -30,7 +30,10 @@
                 <button nz-button nz-tooltip class="signIn" nzType="primary" nzShape="round" [nzTooltipTitle]="signInToolTip" [disabled]="!validateSearchUserForm.valid">
                     <span class="material-icons signInIcon"  >assignment</span>
                     Sign In</button>
-              </nz-form-control>
+            </nz-form-control>
         </nz-form-item>
     </form>
+</div>
+<div *ngIf="validateSearchUserForm.valid">
+    <label  nz-checkbox [(ngModel)]="isChecked">I Am Human</label>
 </div>
