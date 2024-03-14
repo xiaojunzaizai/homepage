@@ -7,21 +7,30 @@
     </h2>
 </div>
 <div class="home">
-    <div class="input-and-button-wrapper">
-        <div class="input-wrapper" id="search-component">
-            <input #searchBox id="search-box" class="input signInInput" type="search" 
-            placeholder="Please enter a valid name ex. first name + middle name + last name" (input)="search(searchBox.value)"
-            [(ngModel)]="searchInput">
-        </div>
-        <a class="button fancy-button signIn" [ngbTooltip]="signInToolTip" [routerLink]="selectedSignInUser ? ['/signInDetail', selectedSignInUser.id] : null"
-        (click)="selectedSignInUser || $event.preventDefault()">    
-            <span class="material-icons"  >assignment</span>
-            <span class="signInText">Sign In</span>
-        </a>
-    </div>
-    <ul class="search-result">
-        <li *ngFor="let signInUser of signInUsers$ | async" (click)= "selectSignInUser(signInUser)">
-            {{signInUser.firstName + ' ' + signInUser.middleName + ' ' + signInUser.lastName}}
-        </li>
-    </ul>
+    <form nz-form [nzLayout]="'inline'" [formGroup]="validateSearchUserForm" nzNoColon="true" (ngSubmit)="submitForm()">
+        <nz-form-item>
+            <nz-form-label nzFor="selectedSignInUserId" [nzSm]="6" [nzXs]="24">
+                <span class="material-icons">person_search</span>
+            </nz-form-label>
+            <nz-form-control [nzSm]="18" [nzXs]="50" nzErrorTip="Please Enter Your First Name or Middle Name or Last Name !">
+                <nz-select nzShowSearch nzAllowClear class="signInInput" formControlName="selectedSignInUserId" id="selectedSignInUserId" nzPlaceHolder="Please Enter Your First or Middle or Last Name" 
+                [nzShowArrow]="false" [nzFilterOption]="filterOption" (nzOnSearch)="search($event)" [nzStatus]="isExisted?'':'error'">
+                    <ng-container *ngFor="let o of signInUsers">
+                        <nz-option *ngIf="!isLoading" [nzLabel]="o.firstName + '  ' + o.middleName + '  ' + o.lastName" [nzValue]="o.id"></nz-option>
+                      </ng-container>
+                    <nz-option *ngIf="isLoading" nzDisabled nzCustomContent>
+                        <span nz-icon nzType="loading" class="loading-icon"></span>
+                        Loading Data...
+                      </nz-option>
+                </nz-select>
+            </nz-form-control>
+        </nz-form-item>
+        <nz-form-item nz-row>
+            <nz-form-control [nzSpan]="10" [nzOffset]="12">
+                <button nz-button nz-tooltip class="signIn" nzType="primary" nzShape="round" [nzTooltipTitle]="signInToolTip" [disabled]="!validateSearchUserForm.valid">
+                    <span class="material-icons signInIcon"  >assignment</span>
+                    Sign In</button>
+              </nz-form-control>
+        </nz-form-item>
+    </form>
 </div>

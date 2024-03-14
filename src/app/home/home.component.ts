@@ -1,9 +1,13 @@
 import { Component,OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Observable, Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged,switchMap } from 'rxjs/operators';
 import { SignInUser } from '../signInUser';
 import { SignInUserService } from '../sign-in-user.service';
 import { SignInAuthService } from '../sign-in-auth.service';
+import { FormControl, FormGroup, NonNullableFormBuilder, Validators } from '@angular/forms';
+import { consoleLog, consoleError } from '../util-tool/utilManagement';
+
 
 @Component({
   selector: 'app-home',
@@ -13,19 +17,30 @@ import { SignInAuthService } from '../sign-in-auth.service';
 export class HomeComponent implements OnInit {
   signInToolTip = 'Sign In';
 
-  searchInput: string = '';
-
   private searchTerms = new Subject<string>();
 
-  signInUsers$!:Observable<SignInUser[]>;
+  signInUsers!:SignInUser[];
 
-  selectedSignInUser : SignInUser | null = null;
+  isLoading: boolean = false;
+
+  isExisted: boolean = true;
+
+  validateSearchUserForm!: FormGroup<{
+    selectedSignInUserId: FormControl<number |null>;
+  }>;
+
 
   constructor (private signInUserService: SignInUserService,
-    private signInAuthService: SignInAuthService){}
+    private signInAuthService: SignInAuthService,
+    private router: Router,
+    private fb: NonNullableFormBuilder){
+      this.validateSearchUserForm=this.fb.group({
+        selectedSignInUserId:this.fb.control<number | null>(null, Validators.required)
+      });
+    }
 
   ngOnInit(): void{
-    this.signInUsers$ = this.searchTerms.pipe(
+    this.searchTerms.pipe(
            // wait 300ms after each keystroke before considering the term
            debounceTime(300),
 
@@ -34,18 +49,45 @@ export class HomeComponent implements OnInit {
      
            // switch to new search observable each time the term changes
            switchMap((term: string)=>this.signInUserService.searchSignInUser(term)),
-    );
+    ).subscribe(users => {
+      // Directly update this.signInUsers with the new users
+      this.signInUsers = users;
+      this.isLoading = false;
+    });
     this.signInAuthService.updateUserId(null);
   }
 
   search(term: string): void{
     this.searchTerms.next(term);
+    this.isLoading = true;
   }
 
-  selectSignInUser(signInUser: SignInUser): void{
-    this.selectedSignInUser = signInUser;
-    this.searchInput = `${signInUser.firstName} ${signInUser.middleName} ${signInUser.lastName}`; // 更新input字段
-    this.searchTerms.next('');
+  // 这个函数接受用户的输入和每一个选项，返回一个布尔值表示该选项是否匹配
+filterOption(searchValue: string, itemValue: any): boolean {
+  // 这里的逻辑是忽略大小写地检查itemValue是否包含searchValue
+  // return itemValue.toLowerCase().indexOf(searchValue.toLowerCase()) !== -1;
+  return true;
+}
+
+  submitForm():void{
+    if(this.validateSearchUserForm.valid){
+      consoleLog('HomeComponent', this.validateSearchUserForm.value.selectedSignInUserId);
+      if(this.validateSearchUserForm.value.selectedSignInUserId){
+        this.isExisted = true;
+        this.router.navigate([`/signInDetail/${this.validateSearchUserForm.value.selectedSignInUserId}`]);
+      } else {
+        this.isExisted = false;
+      }
+      
+    } else {
+      Object.values(this.validateSearchUserForm.controls).forEach(control => {
+        if (control.invalid) {
+          control.markAsDirty();
+          control.updateValueAndValidity({ onlySelf: true });
+          consoleError('HomeComponent','provide invalid input');
+        }
+      });
+    }
   }
 
 

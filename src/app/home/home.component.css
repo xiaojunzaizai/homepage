@@ -1,51 +1,30 @@
 .signIn{
     background-color: transparent;
     font-size: 1.2rem;
-    margin-top: -1.0rem;
-    margin-left: -1rem; /* 调整输入框和按钮之间的空间 */
+    margin-left: -2rem; /* 调整输入框和按钮之间的空间 */
     cursor: pointer;
-    align-items: center;
     border: 2px solid blue;
     display: flex;
-    padding-right: 4px;
+    padding: 3px;
 }
 
-.signInText{
-    margin-left: 5px;
-    margin-right: 5px;
-    white-space: nowrap;
+.signInIcon{
+    margin-right: 10px;
 }
 .signInInput{
-    padding: .5rem;
     width: 30rem;
     max-width: 60rem;
-    box-sizing: border-box;
-    display: block; 
 }
 
-.input-and-button-wrapper{
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.loading-icon {
+    margin-right: 8px;
 }
-
-.input-wrapper {
-    display: inline-flex; /* 如果你想要输入框和列表对齐，这里可以使用flex */
-    width: 520px; /* 占满父容器的宽度 */
-    max-width: 600px; /* 或者你想要的最大宽度 */
-    justify-content: space-between;
-  }
-  
-  .input-wrapper input {
-    padding-right: .1rem; /* 根据需要调整 */
-  }
   
 
 .home{
     display: flex;
-    flex-direction: column;
     justify-content: center;
-    /* align-items: center; */
+    align-items: center;
     margin-top: 2.5rem;
     margin-left: 15rem;
     width: 100%;
@@ -59,39 +38,12 @@ label {
     margin-bottom: .5rem;
 }
 
-
-.search-result li{
-    border-bottom: 1px solid gray;
-    border-left: 1px solid gray;
-    border-right: 1px solid gray;
-    /* border: 1px solid gray; */
-    display: block;
-    width: 480px;
-    max-width: 600px;
-    margin-left: 7.5rem;
-    padding: .5rem;
-    box-sizing: border-box;
-    text-decoration: none;
-    color: black;
-}
-
-.search-result li:hover {
-    background-color: #435A60;
-    color: white;
-}
-
-ul.search-result {
-    padding-left: 0;
-    margin-top: -1rem;
-    list-style-type: none; 
-}
-
 .title{
     color: #333;
     line-height: 2;
     text-align: center;
     margin-top: 10rem;
-    margin-left: 20rem;
+    margin-left: 25rem;
     font-size: 30px;
 }
 .title span {
