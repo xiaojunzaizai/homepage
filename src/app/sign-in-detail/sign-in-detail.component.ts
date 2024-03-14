@@ -1,8 +1,8 @@
 import { AfterViewInit, Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
-import { SignInUserService } from '../sign-in-user.service';
-import { SignInAuthService } from '../sign-in-auth.service';
+import { SignInUserService } from '../services/sign-in-user.service';
+import { SignInAuthService } from '../services/sign-in-auth.service';
 import { SignInUser } from '../signInUser';
 import { cleanUpDateAndTime, adjustMinutes, compareDateAndTime, setDivVisibility } from '../util-tool/utilManagement';
 import DataTable from 'datatables.net-dt';

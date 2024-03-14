@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { InMemoryDbService, RequestInfo } from 'angular-in-memory-web-api';
-import { SignInUser } from './signInUser';
+import { SignInUser } from '../signInUser';
 import { Observable } from 'rxjs';
 import { formatISO } from 'date-fns';
 

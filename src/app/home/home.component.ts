@@ -3,8 +3,8 @@ import { Router } from '@angular/router';
 import { Observable, Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged,switchMap } from 'rxjs/operators';
 import { SignInUser } from '../signInUser';
-import { SignInUserService } from '../sign-in-user.service';
-import { SignInAuthService } from '../sign-in-auth.service';
+import { SignInUserService } from '../services/sign-in-user.service';
+import { SignInAuthService } from '../services/sign-in-auth.service';
 import { FormControl, FormGroup, NonNullableFormBuilder, Validators } from '@angular/forms';
 import { consoleLog, consoleError } from '../util-tool/utilManagement';
 
