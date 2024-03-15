@@ -3,18 +3,22 @@ import { isEqual, isAfter, isBefore, formatISO } from 'date-fns';
 
 
 // combin date picker and time picker and generate a new string format selected date & time.
-export function cleanUpDateAndTime(date:Date, time:Date):string{
-    const newDateTime = new Date(date);
-    newDateTime.setHours(time.getHours());
-    newDateTime.setMinutes(time.getMinutes());
-    newDateTime.setSeconds(0);
-    newDateTime.setMilliseconds(0);
-    return formatISO(newDateTime);
+export function cleanUpDateAndTime(date?:Date, time?:Date):string{
+  if(!date || !time){return '';}
+  const newDateTime = new Date(date);
+  newDateTime.setHours(time.getHours());
+  newDateTime.setMinutes(time.getMinutes());
+  newDateTime.setSeconds(0);
+  newDateTime.setMilliseconds(0);
+  return formatISO(newDateTime);
 
 }
 
 // use in initial time setting
-export function adjustMinutes(date: Date): Date {
+export function adjustMinutes(date?: Date): Date|undefined {
+  if (!date){
+    return date;
+  }
   const minutes = date.getMinutes();
   let adjustedMinutes = 0;
 
@@ -33,6 +37,19 @@ export function adjustMinutes(date: Date): Date {
   // 如果原始分钟数大于 46，则小时数需要加 1
   if (minutes >= 46) {
     adjustedDate.setHours(date.getHours() + 1);
+  }
+  return adjustedDate;
+}
+
+export function adjustDay(date?:Date):Date|undefined{
+  if (!date){
+    return date;
+  }
+  const minutes = date.getMinutes();
+  const hours = date.getHours();
+  const adjustedDate = new Date(date);
+  if (minutes>=46 && hours>=23){
+    adjustedDate.setDate(date.getDate()+1);
   }
   return adjustedDate;
 }

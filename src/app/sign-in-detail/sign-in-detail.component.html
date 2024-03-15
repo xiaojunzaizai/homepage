@@ -8,12 +8,23 @@
             </span>
         </h2>
     </div>
-    <div>
-        
-    </div>
-    <div class='date-time-management'> 
-        <nz-date-picker nzPlaceHolder="Please Select a Date" nzFormat="YYYY/MM/dd" nzInputReadOnly="true" nzShowToday="true" [(ngModel)]="selectedDate" (ngModelChange)="verifyDateAndTime()" ></nz-date-picker>
-        <nz-time-picker nzPlaceHolder="Please Select a Time" nzFormat="HH:mm"  nzInputReadOnly="true" [nzMinuteStep]="15" [(ngModel)]="selectedTime" [nzDefaultOpenValue]="defaultTimeOpenValue" (ngModelChange)="verifyDateAndTime()"></nz-time-picker>
-        <button [disabled]="!IsAbleToCheckIn" class="fancy-button checkIn" (click)="checkIn()">Check In</button>
+    <div class='date-time-management'>
+        <form nz-form [nzLayout]="'inline'" [formGroup]="validateSelectDateAndTimeForm" nzNoColon="true" (ngSubmit)="submitForm()">
+            <nz-form-item>
+                <nz-form-control  [nzSm]="18" [nzXs]="50" nzErrorTip="Please Select a Date !">
+                    <nz-date-picker class="date-picker signIn-date" formControlName="selectDate" nzPlaceHolder="Please Select a Date" nzFormat="YYYY/MM/dd" nzInputReadOnly="true" nzShowToday="true"  (ngModelChange)="verifyDateAndTime()" ></nz-date-picker>
+                </nz-form-control>
+            </nz-form-item>
+            <nz-form-item>
+                <nz-form-control class="signIn-time-control"[nzSm]="18" [nzXs]="50" nzErrorTip="Please Select a Time !">
+                    <nz-time-picker class="date-picker" formControlName="selectTime" nzPlaceHolder="Please Select a Time" nzFormat="HH:mm"  nzInputReadOnly="true" [nzMinuteStep]="15" (ngModelChange)="verifyTime()"></nz-time-picker>
+                </nz-form-control>
+            </nz-form-item>
+            <nz-form-item>
+                <nz-form-control>
+                    <button [disabled]="!IsAbleToCheckIn" class="fancy-button checkIn">Check In</button>
+                </nz-form-control>
+            </nz-form-item>
+        </form>
     </div>
 </div>

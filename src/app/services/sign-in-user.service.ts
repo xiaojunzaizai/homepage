@@ -95,12 +95,12 @@ export class SignInUserService {
       consoleError('SignInUserService',error); // log to console instead
   
       // Adding more detailed error information
-      consoleError(`${operation} failed`, error.message);
+      if (error.message) {
+        consoleError(`${operation} failed`, error.message);
+      }
       if (error.error) {
         consoleError(`Server response`, error.error);
       }
-  
-      consoleLog(`${operation} failed`, error.message);
   
       return of(result as T);
     };
