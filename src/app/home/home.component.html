@@ -32,12 +32,13 @@
                     Sign In</button>
             </nz-form-control>
         </nz-form-item>
-        <nz-form-item nzHasError>
+        <nz-form-item>
             <nz-form-control>
                 <div *ngIf="validateSearchUserForm.value.selectedSignInUserId">
-                    <br>
-                    <br>
                     <label nz-checkbox formControlName="isChecked" id="isChecked">I Am Human</label>
+                </div>
+                <div *ngIf="validateSearchUserForm.value.selectedSignInUserId && !validateSearchUserForm.value.isChecked && isShowError">
+                    <nz-alert class="errorMessage" nzType="error" nzMessage="Please Mark I Am Human"></nz-alert>
                 </div>
             </nz-form-control>
         </nz-form-item>

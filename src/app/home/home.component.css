@@ -32,8 +32,15 @@
 label {
     text-transform: none;
     font-weight: bold;
-    margin-top: 1rem;
+    margin-top: 5rem;
     margin-left: -25rem;
+}
+
+.errorMessage{
+    font-weight: bold;
+    margin-top: 2rem;
+    margin-left: -28rem;
+    width: 200px;
 }
 
 .title{

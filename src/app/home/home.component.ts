@@ -26,6 +26,8 @@ export class HomeComponent implements OnInit {
 
   isExisted: boolean = true;
 
+  isShowError: boolean = false;
+
   validateSearchUserForm!: FormGroup<{
     selectedSignInUserId: FormControl<number |null>;
     isChecked: FormControl<boolean>;
@@ -81,17 +83,22 @@ filterOption(searchValue: string, itemValue: any): boolean {
         this.isExisted = true;
         let token = null;
         if(this.validateSearchUserForm.value.isChecked){
+          this.isShowError = false;
           token = this.tokenService.generateToken();
           consoleLog('HomeComponent', this.validateSearchUserForm.value.selectedSignInUserId);
+        } else {
+          this.isShowError = true;
         }
         this.router.navigate([`/signInDetail/${this.validateSearchUserForm.value.selectedSignInUserId}`],{ queryParams: { signInToken: token } });
       } else {
         this.isExisted = false;
+        this.isShowError = true;
       }
       
     } else {
       Object.values(this.validateSearchUserForm.controls).forEach(control => {
         if (control.invalid) {
+          this.isShowError = true;
           control.markAsDirty();
           control.updateValueAndValidity({ onlySelf: true });
           consoleError('HomeComponent','provide invalid input');
