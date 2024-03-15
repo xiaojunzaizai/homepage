@@ -1,4 +1,4 @@
-import { isEqual, isAfter, isBefore, formatISO } from 'date-fns';
+import { isEqual, isAfter, isBefore, formatISO, differenceInCalendarDays } from 'date-fns';
 
 
 
@@ -62,4 +62,18 @@ export function compareDateAndTime(userSignDate:string[],selectedDate:Date, sele
  } else {
    return true;
  }
+}
+
+export function disableDate() {
+  return (current: Date): boolean => {
+    const today = new Date();
+    const tomorrow = new Date();
+    tomorrow.setDate(today.getDate()+1);
+    // 禁止选择今天及今天之前的日期
+    const hours = today.getHours();
+    if (hours >=23){
+      return differenceInCalendarDays(current, tomorrow) > 0;
+    }
+    return differenceInCalendarDays(current, today) > 0;
+  };
 }

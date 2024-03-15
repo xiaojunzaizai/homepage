@@ -5,8 +5,9 @@ import { SignInUserService } from '../services/sign-in-user.service';
 import { SignInAuthService } from '../services/sign-in-auth.service';
 import { SignInUser } from '../signInUser';
 import { cleanUpDateAndTime, adjustMinutes, adjustDay ,compareDateAndTime, setDivVisibility, consoleLog, consoleError } from '../util-tool/utilManagement';
-import DataTable from 'datatables.net-dt';
 import { FormControl, FormGroup, NonNullableFormBuilder, Validators } from '@angular/forms';
+import { differenceInCalendarDays } from 'date-fns';
+import { disableDate } from '../util-tool/dateTimeUtil';
 declare var $: any;
 
 @Component({
@@ -24,6 +25,8 @@ export class SignInDetailComponent implements OnInit, AfterViewInit{
     selectDate: FormControl<Date|undefined>;
     selectTime: FormControl<Date|undefined>;
   }>;
+
+  disabledDate = disableDate();
 
   constructor(
     private route: ActivatedRoute,

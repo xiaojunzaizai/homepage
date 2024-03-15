@@ -30,48 +30,47 @@ import { en_US } from 'ng-zorro-antd/i18n';
 import { registerLocaleData } from '@angular/common';
 import en from '@angular/common/locales/en';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { SignInUserTableComponent } from "./sign-in-user-table/sign-in-user-table.component";
 
 registerLocaleData(en);
 @NgModule({
-  imports: [
-    AppRoutingModule,
-    BrowserModule,
-    FormsModule,
-    HttpClientModule,
-    // The HttpClientInMemoryWebApiModule module intercepts HTTP requests
-    // and returns simulated server responses.
-    // Remove it when a real server is ready to receive requests.
-    HttpClientInMemoryWebApiModule.forRoot(
-      InMemoryDataService, { dataEncapsulation: false , delay: 500}
-    ),
-    NgbModule,
-    NgZorroAntdModule,
-    NzButtonModule,
-    NzDatePickerModule,
-    NzTimePickerModule,
-    ReactiveFormsModule,
-    RouterModule,
-    IconsProviderModule,
-    NzInputModule,
-    NzLayoutModule,
-    NzMenuModule,
-    BrowserAnimationsModule
-    
-  ],
-  declarations: [
-    AddSignInUserComponent,
-    AppComponent,
-    TopBarComponent,
-    BodyComponent,
-    HomeComponent,
-    LoadingComponent,
-    SignInDetailComponent
-  ],
-  bootstrap: [
-    AppComponent
-  ],
-  providers: [
-    { provide: NZ_I18N, useValue: en_US }
-  ]
+    declarations: [
+        AddSignInUserComponent,
+        AppComponent,
+        TopBarComponent,
+        BodyComponent,
+        HomeComponent,
+        LoadingComponent,
+        SignInDetailComponent
+    ],
+    bootstrap: [
+        AppComponent
+    ],
+    providers: [
+        { provide: NZ_I18N, useValue: en_US }
+    ],
+    imports: [
+        AppRoutingModule,
+        BrowserModule,
+        BrowserAnimationsModule,
+        FormsModule,
+        HttpClientModule,
+        // The HttpClientInMemoryWebApiModule module intercepts HTTP requests
+        // and returns simulated server responses.
+        // Remove it when a real server is ready to receive requests.
+        HttpClientInMemoryWebApiModule.forRoot(InMemoryDataService, { dataEncapsulation: false, delay: 500 }),
+        IconsProviderModule,
+        NgbModule,
+        NgZorroAntdModule,
+        NzButtonModule,
+        NzDatePickerModule,
+        NzTimePickerModule,
+        ReactiveFormsModule,
+        NzInputModule,
+        NzLayoutModule,
+        NzMenuModule,
+        RouterModule,
+        SignInUserTableComponent
+    ]
 })
 export class AppModule { }

@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { SignInUser } from '../signInUser';
 
 @Component({
   selector: 'app-body',
@@ -7,4 +8,5 @@ import { Component } from '@angular/core';
 })
 export class BodyComponent {
 
+    @Input() signInUser?: SignInUser;
 }
