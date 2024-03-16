@@ -23,7 +23,7 @@
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.app.json",
             "assets": [
-              "src/favicon.ico",
+              "src/assets/outline_self_improvement_black_24dp.png",
               "src/assets",
               {
                 "glob": "**/*",
@@ -97,7 +97,7 @@
             "tsConfig": "tsconfig.spec.json",
             "karmaConfig": "karma.conf.js",
             "assets": [
-              "src/favicon.ico",
+              "src/assets/outline_self_improvement_black_24dp.png",
               "src/assets"
             ],
             "styles": [
