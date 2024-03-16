@@ -1,0 +1,4 @@
+.signInTable td, .signInTable th{
+    text-align: center;       /* 水平居中 */
+    vertical-align: middle;   /* 垂直居中 */
+}

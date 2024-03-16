@@ -1,9 +1,8 @@
 <div *ngIf="!loading">
-    <nz-table #signInUserDateData [nzData]="signInDateList" nzTableLayout="fixed" [nzPageSize]="9" [nzBordered] = "true" [nzLoading]="loading" [nzWidthConfig]="widthConfig">
+    <nz-table class="signInTable" #signInUserDateData [nzData]="signInDateList" nzTableLayout="fixed" [nzPageSize]="9" [nzBordered] = "true" [nzLoading]="loading" [nzWidthConfig]="widthConfig">
         <thead>
             <tr>
                 <th *ngFor="let column of listOfColumns" 
-                [nzShowSort]="true"
                 [nzSortOrder]="column.sortOrder"
                 [nzSortFn]="column.sortFn"
                 [nzSortDirections]="column.sortDirections">{{column.name}}</th>
