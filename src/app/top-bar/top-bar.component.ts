@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { SignInUserService } from '../services/sign-in-user.service';
-import { SignInUser } from '../signInUser';
+import { SignInUser } from '../interface/signInUser';
 import { SignInAuthService } from '../services/sign-in-auth.service';
 import { Subscription } from 'rxjs';
 import { toggleLinkDisabled } from '../util-tool/disableATagClickUtil';

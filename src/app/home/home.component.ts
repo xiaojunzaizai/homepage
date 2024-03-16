@@ -2,7 +2,7 @@ import { Component,OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable, Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged,switchMap } from 'rxjs/operators';
-import { SignInUser } from '../signInUser';
+import { SignInUser } from '../interface/signInUser';
 import { SignInUserService } from '../services/sign-in-user.service';
 import { SignInAuthService } from '../services/sign-in-auth.service';
 import { FormControl, FormGroup, NonNullableFormBuilder, Validators } from '@angular/forms';

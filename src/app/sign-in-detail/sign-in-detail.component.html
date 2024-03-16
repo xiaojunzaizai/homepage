@@ -11,13 +11,13 @@
     <div class='date-time-management'>
         <form nz-form [nzLayout]="'inline'" [formGroup]="validateSelectDateAndTimeForm" nzNoColon="true" (ngSubmit)="submitForm()">
             <nz-form-item>
-                <nz-form-control  [nzSm]="18" [nzXs]="50" nzErrorTip="Please Select a Date !">
+                <nz-form-control class="controlSet" [nzSm]="18" [nzXs]="50" nzErrorTip="Please Select a Date !">
                     <nz-date-picker class="date-picker signIn-date" formControlName="selectDate" nzPlaceHolder="Please Select a Date" nzFormat="YYYY/MM/dd" nzInputReadOnly="true" nzShowToday="true" [nzDisabledDate]="disabledDate" (ngModelChange)="verifyDateAndTime()" ></nz-date-picker>
                 </nz-form-control>
             </nz-form-item>
             <nz-form-item>
-                <nz-form-control class="signIn-time-control"[nzSm]="18" [nzXs]="50" nzErrorTip="Please Select a Time !">
-                    <nz-time-picker class="date-picker" formControlName="selectTime" nzPlaceHolder="Please Select a Time" nzFormat="HH:mm"  nzInputReadOnly="true" [nzMinuteStep]="15" (ngModelChange)="verifyTime()"></nz-time-picker>
+                <nz-form-control class="controlSet"  class="signIn-time-control"[nzSm]="18" [nzXs]="50" nzErrorTip="Please Select a Time !">
+                    <nz-time-picker class="date-picker" formControlName="selectTime" nzPlaceHolder="Please Select a Time" nzFormat="HH:mm"  nzInputReadOnly="true" [nzMinuteStep]="15" [nzDefaultOpenValue]="defaultTimeOpenValue" (ngModelChange)="verifyTime()"></nz-time-picker>
                 </nz-form-control>
             </nz-form-item>
             <nz-form-item>
@@ -28,4 +28,7 @@
         </form>
     </div>
 </div>
-<app-body [signInUser]="signInUser"></app-body>
+<div class="sign-in-body" *ngIf="signInUser">
+    <app-body [signInUser]="signInUser" [loading]="loading"></app-body>
+</div>
+

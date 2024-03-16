@@ -1,4 +1,4 @@
-import { isEqual, isAfter, isBefore, formatISO, differenceInCalendarDays } from 'date-fns';
+import { isEqual, isAfter, isBefore, formatISO, differenceInCalendarDays, format, parseISO } from 'date-fns';
 
 
 
@@ -76,4 +76,16 @@ export function disableDate() {
     }
     return differenceInCalendarDays(current, today) > 0;
   };
+}
+
+export function formatDateAndTime(date:string):string{
+  const formattedDates = format(parseISO(date), 'yyyy-MM-dd HH:mm:ss.SSS');
+  return formattedDates;
+}
+
+export function formatDateAndTimeList(dateList:string[]):string[] {
+  const formattedDates = dateList.map(date => 
+    format(parseISO(date), 'yyyy-MM-dd HH:mm:ss')
+  );
+  return formattedDates;
 }

@@ -1,4 +1,4 @@
-import { SignInUser } from "../signInUser";
+import { SignInUser } from "../interface/signInUser";
 
 export function isExistedByFirstname(userlist:SignInUser[], lastName:string,middleName?:string):boolean{
     if(!userlist){ return false;}

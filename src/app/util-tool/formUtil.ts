@@ -1,4 +1,4 @@
-import { SignInUser } from "../signInUser";
+import { SignInUser } from "../interface/signInUser";
 
 export function formatForm(formValue: any): SignInUser{
     const newUser: SignInUser = {

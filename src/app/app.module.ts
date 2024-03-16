@@ -41,7 +41,8 @@ registerLocaleData(en);
         BodyComponent,
         HomeComponent,
         LoadingComponent,
-        SignInDetailComponent
+        SignInDetailComponent,
+        SignInUserTableComponent
     ],
     bootstrap: [
         AppComponent
@@ -69,8 +70,7 @@ registerLocaleData(en);
         NzInputModule,
         NzLayoutModule,
         NzMenuModule,
-        RouterModule,
-        SignInUserTableComponent
+        RouterModule
     ]
 })
 export class AppModule { }

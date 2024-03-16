@@ -1,8 +1,20 @@
-<div>
-    <!-- <nz-table>
+<div *ngIf="!loading">
+    <nz-table #signInUserDateData [nzData]="signInDateList" nzTableLayout="fixed" [nzPageSize]="9" [nzBordered] = "true" [nzLoading]="loading" [nzWidthConfig]="widthConfig">
         <thead>
-
+            <tr>
+                <th *ngFor="let column of listOfColumns" 
+                [nzShowSort]="true"
+                [nzSortOrder]="column.sortOrder"
+                [nzSortFn]="column.sortFn"
+                [nzSortDirections]="column.sortDirections">{{column.name}}</th>
+            </tr>
         </thead>
-
-    </nz-table> -->
+        <tbody>
+            <tr *ngFor="let data of signInUserDateData.data">
+                <td>{{signInUser.id}}</td>
+                <td>{{signInUser.firstName}}  {{signInUser.middleName}}  {{signInUser.lastName}}</td>
+                <td>{{data}}</td>
+            </tr>
+        </tbody>
+    </nz-table>
 </div>

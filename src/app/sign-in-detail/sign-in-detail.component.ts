@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { SignInUserService } from '../services/sign-in-user.service';
 import { SignInAuthService } from '../services/sign-in-auth.service';
-import { SignInUser } from '../signInUser';
+import { SignInUser } from '../interface/signInUser';
 import { cleanUpDateAndTime, adjustMinutes, adjustDay ,compareDateAndTime, setDivVisibility, consoleLog, consoleError } from '../util-tool/utilManagement';
 import { FormControl, FormGroup, NonNullableFormBuilder, Validators } from '@angular/forms';
 import { differenceInCalendarDays } from 'date-fns';
@@ -17,9 +17,10 @@ declare var $: any;
 })
 export class SignInDetailComponent implements OnInit, AfterViewInit{
 
-  signInUser: SignInUser | undefined;
+  signInUser?: SignInUser;
   IsAbleToCheckIn?: boolean = false;
   loading: boolean = true;
+  defaultTimeOpenValue = new Date(0, 0, 0, 0, 0, 0);
   
   validateSelectDateAndTimeForm!: FormGroup<{
     selectDate: FormControl<Date|undefined>;
