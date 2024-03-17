@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, OnChanges } from '@angular/core';
 import { SignInUser } from '../interface/signInUser';
 import { signInUserColumns } from '../column-setup/sign-in-user-columns';
 import { consoleLog, formatDateAndTimeList } from '../util-tool/utilManagement';
@@ -11,7 +11,7 @@ import { consoleLog, formatDateAndTimeList } from '../util-tool/utilManagement';
   templateUrl: './sign-in-user-table.component.html',
   styleUrl: './sign-in-user-table.component.css'
 })
-export class SignInUserTableComponent implements OnInit{
+export class SignInUserTableComponent implements OnInit, OnChanges{
 
   @Input() signInUser!: SignInUser;
   @Input() loading: boolean = false;
@@ -24,4 +24,10 @@ export class SignInUserTableComponent implements OnInit{
   ngOnInit(): void {
     this.signInDateList = formatDateAndTimeList(this.signInUser.signDate);
   }
+
+  ngOnChanges(): void {
+    consoleLog('SignInUserTableComponent', this.signInUser);
+    this.signInDateList = formatDateAndTimeList(this.signInUser.signDate);
+  }
+
 }
