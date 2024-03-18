@@ -93,7 +93,9 @@ filterOption(searchValue: string, itemValue: any): boolean {
         } else {
           this.isShowError = true;
         }
-        this.router.navigate([`/signInDetail/${this.validateSearchUserForm.value.selectedSignInUserId}`],{ queryParams: { signInToken: token } });
+        // this.router.navigate([`/signInDetail/${this.validateSearchUserForm.value.selectedSignInUserId}`],{ queryParams: { signInToken: token } });
+        this.router.navigate([`/signInDetail/${this.validateSearchUserForm.value.selectedSignInUserId}`]);
+
       } else {
         this.isExisted = false;
         this.isShowError = true;
