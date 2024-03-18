@@ -96,11 +96,13 @@ export class SignInDetailComponent implements OnInit, AfterViewInit{
         this.tokenService.clearSpecificToken('signInToken');
         this.storageService.clearLocalFlag('reloaded');
         this.router.navigate(['/home']);
-        console.log('Page was refreshed. sessionStorage cleared.');
+        // console.log('Page was refreshed. sessionStorage cleared.');
+        consoleLog('SignInDetailComponent','Page was refreshed. sessionStorage cleared.');
       } else {
         // 页面通过其他方式加载，比如正常导航或首次访问
         this.storageService.setLocalFlag('reloaded');
-        console.log('Page loaded through normal navigation or for the first time.');
+        // console.log('Page loaded through normal navigation or for the first time.');
+        consoleLog('SignInDetailComponent','Page loaded through normal navigation or for the first time.');
       }
     }
     
