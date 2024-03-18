@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, NavigationStart, Router, Event as RouterEvent } from '@angular/router';
 import { Location } from '@angular/common';
 import { SignInUserService } from '../services/sign-in-user.service';
 import { SignInAuthService } from '../services/sign-in-auth.service';
@@ -8,6 +8,9 @@ import { cleanUpDateAndTime, adjustMinutes, adjustDay ,compareDateAndTime, setDi
 import { FormControl, FormGroup, NonNullableFormBuilder, Validators } from '@angular/forms';
 import { differenceInCalendarDays } from 'date-fns';
 import { disableDate } from '../util-tool/dateTimeUtil';
+import { filter } from 'rxjs';
+import { StorageService } from '../services/storage.service';
+import { TokenService } from '../services/token.service';
 declare var $: any;
 
 @Component({
@@ -18,7 +21,7 @@ declare var $: any;
 export class SignInDetailComponent implements OnInit, AfterViewInit{
 
   signInUser?: SignInUser;
-  IsAbleToCheckIn?: boolean = false;
+  IsAbleToCheckIn: boolean = false;
   loading: boolean = true;
   defaultTimeOpenValue = new Date(0, 0, 0, 0, 0, 0);
   
@@ -31,20 +34,40 @@ export class SignInDetailComponent implements OnInit, AfterViewInit{
 
   constructor(
     private route: ActivatedRoute,
+    private router: Router,
     private signInUserService: SignInUserService,
     private signInAuthService: SignInAuthService,
     private fb: NonNullableFormBuilder,
+    private storageService: StorageService,
+    private tokenService: TokenService,
     private location: Location,
   ) {
     this.validateSelectDateAndTimeForm=this.fb.group({
       selectDate:this.fb.control<Date|undefined>(adjustDay(new Date()), Validators.required),
       selectTime:this.fb.control<Date|undefined>(adjustMinutes(new Date()),Validators.required)
     });
+
+    // this.router.events.pipe(
+    //   filter((event): event is NavigationStart => event instanceof NavigationStart)
+    // ).subscribe((event: NavigationStart) => {
+    //   if (event.navigationTrigger === 'imperative') {
+    //     console.log('Navigation triggered by application');
+    //     this.storageService.setLocalFlag('visited');
+    //     this.IsRefresh = false;
+    //     console.log(this.IsRefresh);
+    //   } else if (event.navigationTrigger === 'popstate') {
+    //     console.log('Navigation triggered by browser');
+    //   } else if (event.restoredState) {
+    //     console.log('Navigating back/forward');
+    //   }
+    // });
+
   }
 
   ngOnInit(): void{
     setDivVisibility(this.loading);
     this.getsignInUserDetail();
+    this. handlePageLoad();
   }
 
   ngAfterViewInit(): void {
@@ -60,6 +83,28 @@ export class SignInDetailComponent implements OnInit, AfterViewInit{
         this.loading = false;
         setDivVisibility(this.loading);
       });
+  }
+
+  handlePageLoad() {
+    // 使用PerformanceNavigationTiming接口更精确地获取性能条目数据
+    if (performance.getEntriesByType("navigation").length) {
+      const navigationEntry = performance.getEntriesByType("navigation")[0] as PerformanceNavigationTiming;
+      const isRefresh = this.storageService.getLocalFlag('reloaded');
+      // 检查页面是如何加载的
+      if (navigationEntry.type === 'reload' && isRefresh) {
+        // 页面是通过刷新操作加载的，清除sessionStorage
+        this.tokenService.clearSpecificToken('signInToken');
+        this.storageService.clearLocalFlag('reloaded');
+        this.router.navigate(['/home']);
+        console.log('Page was refreshed. sessionStorage cleared.');
+      } else {
+        // 页面通过其他方式加载，比如正常导航或首次访问
+        this.storageService.setLocalFlag('reloaded');
+        console.log('Page loaded through normal navigation or for the first time.');
+      }
+    }
+    
+
   }
 
   // add some check condition to prevernt when nothing selected , user can click check in button.

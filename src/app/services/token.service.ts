@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { v4 as uuidv4 } from 'uuid';
+import { StorageService } from './storage.service';
 
 @Injectable({
   providedIn: 'root'
@@ -7,7 +8,7 @@ import { v4 as uuidv4 } from 'uuid';
 export class TokenService {
   private token: string = '';
 
-  constructor() { }
+  constructor( private storageService: StorageService) { }
 
   generateToken(): string {
     this.token = uuidv4(); // 使用UUID生成一个token
