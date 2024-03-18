@@ -16,7 +16,7 @@ export class SignInUserTableComponent implements OnInit, OnChanges{
   @Input() signInUser!: SignInUser;
   @Input() loading: boolean = false;
   signInDateList: string[] =[];
-  widthConfig: string[] = ['100px', '1fr', '2fr'];
+  widthConfig: string[] = ['100px', '100px', '1fr', '2fr'];
 
   
   listOfColumns=signInUserColumns;
