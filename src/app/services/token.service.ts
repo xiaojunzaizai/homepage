@@ -23,6 +23,10 @@ export class TokenService {
     sessionStorage.clear();
   }
 
+  clearSpecificToken(name:string):void{
+    sessionStorage.removeItem(name);
+  }
+
   isValidToken(tokenToCheck: string): boolean {
     return this.getToken() === tokenToCheck;
   }

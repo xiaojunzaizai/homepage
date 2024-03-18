@@ -46,7 +46,8 @@ export class HomeComponent implements OnInit {
     }
 
   ngOnInit(): void{
-    this.tokenService.clearToken();
+    // this.tokenService.clearToken();
+    this.tokenService.clearSpecificToken('signInToken');
     this.searchTerms.pipe(
 
       // wait 300ms after each keystroke before considering the term

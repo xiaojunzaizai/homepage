@@ -26,7 +26,6 @@ export class SignInUserTableComponent implements OnInit, OnChanges{
   }
 
   ngOnChanges(): void {
-    consoleLog('SignInUserTableComponent', this.signInUser);
     this.signInDateList = formatDateAndTimeList(this.signInUser.signDate);
   }
 

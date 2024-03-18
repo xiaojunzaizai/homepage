@@ -56,7 +56,6 @@ export class SignInDetailComponent implements OnInit, AfterViewInit{
     this.signInUserService.getSignInUser(id)
       .subscribe(signInUser => {
         this.signInUser = signInUser;
-        consoleLog('SignInDetailComponent', this.signInUser);
         this.verifyDateAndTime();
         this.loading = false;
         setDivVisibility(this.loading);
