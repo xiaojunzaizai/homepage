@@ -8,6 +8,7 @@ import { SignInAuthService } from '../services/sign-in-auth.service';
 import { FormControl, FormGroup, NonNullableFormBuilder, Validators } from '@angular/forms';
 import { consoleLog, consoleError } from '../util-tool/utilManagement';
 import { TokenService } from '../services/token.service';
+import { StorageService } from '../services/storage.service';
 
 
 @Component({
@@ -38,6 +39,7 @@ export class HomeComponent implements OnInit {
     private signInAuthService: SignInAuthService,
     private router: Router,
     private tokenService: TokenService,
+    private storageService: StorageService,
     private fb: NonNullableFormBuilder){
       this.validateSearchUserForm=this.fb.group({
         selectedSignInUserId:this.fb.control<number | null>(null, Validators.required),
@@ -48,6 +50,7 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void{
     // this.tokenService.clearToken();
     this.tokenService.clearSpecificToken('signInToken');
+    this.storageService.clearLocalFlag('reloaded');
     this.searchTerms.pipe(
 
       // wait 300ms after each keystroke before considering the term
